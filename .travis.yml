@@ -124,7 +124,6 @@ base_postgres: &postgres_default
   python: 2.7
   services:
     - memcached
-    - redis-server
     - postgresql
   before_install:
     - *base_install
@@ -141,7 +140,6 @@ base_acceptance: &acceptance_default
   services:
     - docker
     - memcached
-    - redis-server
     - postgresql
   before_install:
     - *base_install
@@ -239,7 +237,6 @@ matrix:
       env: TEST_SUITE=cli
       services:
         - postgresql
-        - redis-server
       install:
         - python setup.py install_egg_info
         - pip install -U -e ".[dev]"
@@ -261,7 +258,6 @@ matrix:
       services:
         - docker
         - memcached
-        - redis-server
         - postgresql
       before_install:
         - *base_install
@@ -275,7 +271,6 @@ matrix:
       services:
         - docker
         - memcached
-        - redis-server
         - postgresql
       before_install:
         - *base_install

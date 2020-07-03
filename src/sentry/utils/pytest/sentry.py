@@ -163,11 +163,6 @@ def pytest_configure(config):
     setup_services()
     register_extensions()
 
-    from sentry.utils.redis import clusters
-
-    with clusters.get("default").all() as client:
-        client.flushdb()
-
     # force celery registration
     from sentry.celery import app  # NOQA
 
@@ -240,11 +235,6 @@ def pytest_runtest_teardown(item):
 
     if hasattr(newsletter.backend, "clear"):
         newsletter.backend.clear()
-
-    from sentry.utils.redis import clusters
-
-    with clusters.get("default").all() as client:
-        client.flushdb()
 
     from celery.task.control import discard_all
 
